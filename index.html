@@ -1,19 +1,90 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trigger do Didi</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #0e0e0e; color: #00ffcc; text-align: center; padding: 50px; }
-        h1 { font-size: 2.5em; }
-        p { font-size: 1.2em; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trigger do Didi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-box, .panel {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+    input[type="password"] {
+      padding: 10px;
+      width: 200px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 15px;
+      background-color: #00b894;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #panel {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <h1>🚀 Painel Trigger do Didi</h1>
-    <p>Painel de alertas da moeda <strong>VIRTUAL/USDT</strong> com sinais em tempo real.</p>
-    <p>Integrado ao bot do Telegram para entradas seguras.</p>
+  <div class="login-box" id="login-box">
+    <h2>Trigger do Didi</h2>
+    <p>Digite a senha para acessar:</p>
+    <input type="password" id="senha" placeholder="Senha">
+    <br>
+    <button onclick="verificarSenha()">Entrar</button>
+  </div>
+
+  <div class="panel" id="panel">
+    <h2>Bem-vindo ao Painel!</h2>
+    <p>Aqui você verá os sinais do bot em tempo real.</p>
+    <p>🔔 Próximo alerta em: <span id="timer">5:00</span></p>
+    <button onclick="alert('Função de sinal em construção!')">Ver Sinal Agora</button>
+  </div>
+
+  <script>
+    function verificarSenha() {
+      const senha = document.getElementById('senha').value;
+      if (senha === 'pimpo021') {
+        document.getElementById('login-box').style.display = 'none';
+        document.getElementById('panel').style.display = 'block';
+        iniciarTimer();
+      } else {
+        alert('Senha incorreta!');
+      }
+    }
+
+    function iniciarTimer() {
+      let tempo = 300; // 5 minutos em segundos
+      const timerEl = document.getElementById('timer');
+      setInterval(() => {
+        if (tempo > 0) {
+          tempo--;
+          const minutos = Math.floor(tempo / 60);
+          const segundos = tempo % 60;
+          timerEl.textContent = `${minutos}:${segundos.toString().padStart(2, '0')}`;
+        }
+      }, 1000);
+    }
+  </script>
 </body>
 </html>
